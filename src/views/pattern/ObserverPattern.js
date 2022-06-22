@@ -1,4 +1,5 @@
 // 观察者模式
+
 // 观察者模式又称发布-订阅模式（Publish/Subscribe Pattern），是我们经常接触到的设计模式，日常生活中的应用也比比皆是，比如你订阅了某个博主的频道，vue双向绑定
 // 当有内容更新时会收到推送；又比如JavaScript中的事件订阅响应机制。观察者模式的思想用一句话描述就是：
 // 被观察对象（subject）维护一组观察者（observer），当被观察对象状态改变时，通过调用观察者的某个方法将这些变化通知到观察者。
@@ -9,54 +10,51 @@
 // 被观察者
 // 被观察者
 function Subject() {
-  this.observers = [];
+    this.observers = [];
 }
 
-Subject.prototype = {
-  // 订阅
-  subscribe: function (observer) {
-    this.observers.push(observer);
-  },
-  // 取消订阅
-  unsubscribe: function (observerToRemove) {
-    this.observers = this.observers.filter(observer => {
-      return observer !== observerToRemove;
-    })
-  },
-  // 事件触发
-  fire: function () {
-    this.observers.forEach(observer => {
-      observer.call();
-    });
-  }
+Subject.prototype = { // 订阅
+    subscribe: function (observer) {
+        this.observers.push(observer);
+    },
+    // 取消订阅
+    unsubscribe: function (observerToRemove) {
+        this.observers = this.observers.filter(observer => {
+            return observer !== observerToRemove;
+        })
+    },
+    // 事件触发
+    fire: function () {
+        this.observers.forEach(observer => {
+            observer.call();
+        });
+    }
 }
 
 const subject = new Subject();
 
 function observer1() {
-  console.log('Observer 1 Firing!');
+    console.log('Observer 1 Firing!');
 }
 
 function observer2() {
-  console.log('Observer 2 Firing!');
+    console.log('Observer 2 Firing!');
 }
 
 subject.subscribe(observer1);
 subject.subscribe(observer2);
 subject.fire();
 
-//输出：
-// Observer 1 Firing! 
+// 输出：
+// Observer 1 Firing!
 // Observer 2 Firing!
 
 
 subject.unsubscribe(observer2);
 subject.fire();
 
-//输出：
+// 输出：
 // Observer 1 Firing!
-
-
 
 
 // 优点
