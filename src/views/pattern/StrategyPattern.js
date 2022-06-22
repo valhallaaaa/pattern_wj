@@ -19,4 +19,3 @@ let calculateBonus = function (level, salary) {
 }
 console.log(calculateBonus('A', 20000))
 // 6000
-
